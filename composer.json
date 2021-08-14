@@ -1,0 +1,27 @@
+{
+  "name": "amorpro3/smoke-tests",
+  "description": "Software Development Kit with tools for launching the smoke tests in your projects",
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4" : {
+      "SmokeTests\\" : "src/"
+    }
+  },
+  "require": {
+    "php": "7.2.*",
+    "ext-json" : "*",
+    "ext-curl" : "*",
+    "webmozart/assert": "1.*"
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": "8.*"
+  },
+
+  "authors": [
+    {
+      "name": "Anton Butkov",
+      "email": "amorpro3@gmail.com"
+    }
+  ]
+}
