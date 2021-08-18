@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'host' => 'https://landing',
+    'host' => 'https://google.com',
     'plugins' => [
         \SmokeTests\Plugins\Log\Console\Detailed::class,
     ]
