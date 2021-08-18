@@ -10,6 +10,7 @@ namespace SmokeTests\Plugins;
 
 use SmokeTests\Http\Request;
 use SmokeTests\Http\Response;
+use SmokeTests\Plugins\Exception\SkipTest;
 use Throwable;
 use Webmozart\Assert\Assert;
 

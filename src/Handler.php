@@ -14,6 +14,7 @@ use SmokeTests\Http\Request;
 use SmokeTests\Http\Response;
 use SmokeTests\Plugins\Base;
 use SmokeTests\Plugins\Enabled;
+use SmokeTests\Plugins\Exception\SkipTest;
 use SmokeTests\Plugins\Response\Contains;
 use SmokeTests\Plugins\Response\Headers;
 use SmokeTests\Plugins\Response\Status;
@@ -53,7 +54,7 @@ class Handler
     /**
      * @var Request
      */
-    private $request;
+    private $test;
 
     /**
      * @var Response
@@ -96,19 +97,19 @@ class Handler
 
 
     /**
-     * @param Request  $request
+     * @param Request  $test
      * @param Response $response
      * @param null     $httpClientClass
      */
-    public function __construct(Request $request, $httpClientClass = null)
+    public function __construct(Request $test, $httpClientClass = null)
     {
         if(!$httpClientClass){
             $httpClientClass = Curl::class;
         }
 
-        $this->request = $request;
+        $this->test     = $test;
         $this->response = new Response();
-        $this->client = new $httpClientClass($request, $this->response);
+        $this->client = new $httpClientClass($test, $this->response);
     }
 
     /**
@@ -117,11 +118,11 @@ class Handler
      */
     public function addPlugin(Base $plugin): Handler
     {
-        $this->plugins[] = $plugin;
+        $this->plugins[] = $plugin->setHandler($this);
         return $this;
     }
 
-    public function handle(): Response
+    public function handle()
     {
         try {
             $this->beforeHandle();
@@ -131,27 +132,25 @@ class Handler
         } catch (Throwable $e) {
             $this->onError($e);
         }
-
-        return $this->response;
     }
 
     private function beforeHandle(): void
     {
         foreach ($this->plugins as $plugin) {
-            $plugin->beforeHandle($this->request, $this->response, $this->plugins);
+            $plugin->beforeHandle($this->test, $this->response, $this->plugins);
         }
     }
 
     private function afterHandle(): void
     {
         foreach ($this->plugins as $plugin) {
-            $plugin->afterHandle($this->request, $this->response, $this->plugins);
+            $plugin->afterHandle($this->test, $this->response, $this->plugins);
         }
     }
     private function onError(Throwable $e): void
     {
         foreach ($this->plugins as $plugin) {
-            $plugin->onError($this->request, $this->response, $this->plugins, $e);
+            $plugin->onError($this->test, $this->response, $this->plugins, $e);
         }
     }
 

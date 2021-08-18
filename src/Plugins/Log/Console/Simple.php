@@ -6,14 +6,14 @@
  * Time: 9:19
  */
 
-namespace SmokeTests\Plugins\Display;
+namespace SmokeTests\Plugins\Log\Console;
 
 use SmokeTests\Http\Request;
 use SmokeTests\Http\Response;
 use SmokeTests\Plugins\Base;
 use Throwable;
 
-class Failed extends Base
+class Simple extends Base
 {
 
 
@@ -24,15 +24,17 @@ class Failed extends Base
 
     public function beforeHandle(Request $request, Response $response, array $plugins):void
     {
+
     }
 
     public function afterHandle(Request $request, Response $response, array $plugins):void
     {
+        echo '.';
     }
 
     public function onError(Request $request, Response $response, array $plugins, Throwable $e):void
     {
-        echo sprintf("%s %s : ERROR %s\n", $request->getMethod(), $request->getUri(), $e->getMessage());
+        echo 'E';
     }
 
     /**

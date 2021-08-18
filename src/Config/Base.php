@@ -37,11 +37,15 @@ abstract class Base
         Assert::notEmpty($filePath, 'Tests config file path can not be empty.');
         Assert::fileExists((string)$filePath, 'Tests config file does not exists');
 
+        $filePath = realpath($filePath);
+
         if ($this->canProcess($filePath)) {
             $tests = $this->_loadDo($filePath);
+            Assert::isArray($tests, "Unable to load tests from {$filePath}");
             return $this->attachBaseHost($tests, $baseHost);
         } elseif ($this->next instanceof Base) {
             $tests = $this->next->load($filePath, $baseHost);
+            Assert::isArray($tests, "Unable to load tests from {$filePath}");
             return $this->attachBaseHost($tests, $baseHost);
         } else {
             throw new \InvalidArgumentException("Unsupported tests config file {$filePath}");

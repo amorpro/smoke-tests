@@ -27,7 +27,7 @@ foreach ($tests as $test) {
 
 #### Result
 
-[SmokeTests\Plugins\Display\Detailed](src/Plugins/Display/Detailed.php) plugin<br/>
+[SmokeTests\Plugins\Log\Console\Detailed](src/Plugins/Display/Detailed.php) plugin<br/>
 Will provide the detailed info about the tests and process
 
 ```
@@ -39,13 +39,13 @@ ERROR Test [GET http://landing/api/user-data] is disabled
 GET /api/user-data?username={username}&jdialog=jdialog3=t3a975ya71oubbcb6lag6y9wcmuhlfe9ia51uoegqmzinfcdfg : OK
 ```
 
-[SmokeTests\Plugins\Display\Simple](src/Plugins/Display/Simple.php) plugin<br/>
+[SmokeTests\Plugins\Log\Console\Simple](src/Plugins/Display/Simple.php) plugin<br/>
 Will provide the minimum info about the tests, dot "." means OK, "E" means failed 
 ```
 ..E....
 ```
 
-[SmokeTests\Plugins\Display\Failed](src/Plugins/Display/Failed.php) plugin<br/>
+[SmokeTests\Plugins\Log\Console\Failed](src/Plugins/Display/Failed.php) plugin<br/>
 Will provide the detailed info only by tests who failed
 ```
 GET / : ERROR Test [GET http://landing/] is disabled
@@ -55,8 +55,8 @@ GET / : ERROR Test [GET http://landing/] is disabled
 
 Support the next type of config formats:
 
-* [Php](configs/tests.json)
-* [Json](configs/tests.php)
+* [Php](smoke-tests/JsonExample.json)
+* [Json](smoke-tests/ModuleName/PhpExample.php)
 
 Minimum config loading code
 

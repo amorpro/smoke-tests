@@ -30,7 +30,7 @@ class Request
 
     public static function createFromArray(array $smokeTest): Request
     {
-        $test = new self();
+        $test = new static();
 
         Assert::notEmpty($smokeTest['uri'], 'Uri can\'t be empty');
 

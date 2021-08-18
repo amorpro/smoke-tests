@@ -6,7 +6,7 @@
  * Time: 9:19
  */
 
-namespace SmokeTests\Plugins\Display;
+namespace SmokeTests\Plugins\Log\Console;
 
 use SmokeTests\Http\Request;
 use SmokeTests\Http\Response;

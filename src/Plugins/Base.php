@@ -2,6 +2,7 @@
 
 namespace SmokeTests\Plugins;
 
+use SmokeTests\Handler;
 use SmokeTests\Http\Request;
 use SmokeTests\Http\Response;
 use Throwable;
@@ -17,13 +18,16 @@ abstract class Base
 {
 
     protected $config = [];
+    protected $handler;
 
     /**
      * @param $config
      */
-    public function __construct($config = null)
+    public function __construct($config = null, Handler $handler = null)
     {
         $this->config = $config;
+        $this->handler = $handler;
+
     }
 
     /**
@@ -43,6 +47,18 @@ abstract class Base
         $this->config = $config;
         return $this;
     }
+
+    /**
+     * @param Handler $handler
+     * @return $this
+     */
+    public function setHandler($handler)
+    {
+        $this->handler = $handler;
+        return $this;
+    }
+
+
 
     /**
      * @param array $config
