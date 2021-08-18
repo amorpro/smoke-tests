@@ -16,7 +16,7 @@
   },
 
   "bin": [
-    "bin/smoke_tests.php"
+    "bin/smoke_tests"
   ],
 
 
