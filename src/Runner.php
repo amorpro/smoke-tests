@@ -31,7 +31,7 @@ class Runner
             }
 
             is_dir($testsPath) ?
-                $this->run($testsPath, $baseHost):
+                $this->run($testsPath, $baseHost, $plugins):
                 $this->runTestFile($testsPath, $baseHost, $plugins);
         }
     }
