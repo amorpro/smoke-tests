@@ -93,5 +93,5 @@ if(!is_array($configs) || !count($configs)){
 $testsFilter = $_SERVER['argv'][1];
 
 
-(new \SmokeTests\Runner())->run($testsDir, $configs['host'], $testsFilter, $configs['plugins']);
+(new \SmokeTests\Runner())->run($testsDir, $configs, $testsFilter);
 

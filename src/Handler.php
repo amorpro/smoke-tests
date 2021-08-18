@@ -73,7 +73,8 @@ class Handler
      * @param Response $response
      * @return Handler
      */
-    public static function createFromConfig(array $testConfig, $httpClientClass = null): Handler
+    public static function createFromConfig(array $testConfig, $httpClientClass = null, array $detectablePlugins = []):
+    Handler
     {
         // set Default values to the test
         $testConfig = array_merge(self::TEST_DEFAULT_VALUES, $testConfig);
@@ -81,7 +82,8 @@ class Handler
         $handler = new self(Request::createFromArray($testConfig), $httpClientClass);
 
         // Detect and initialize plugins from the test
-        foreach(self::DETECTABLE_PLUGIN_CLASSES as $pluginClass){
+        $detectablePlugins = array_merge(self::DETECTABLE_PLUGIN_CLASSES, $detectablePlugins);
+        foreach($detectablePlugins as $pluginClass){
             /** @var Base $pluginClass */
             if($pluginClass::needToInitialize($testConfig)){
                 $pluginConfig = $pluginClass::extractConfig($testConfig);
