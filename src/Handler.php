@@ -20,6 +20,8 @@ use SmokeTests\Plugins\Response\Headers;
 use SmokeTests\Plugins\Response\Status;
 use SmokeTests\Plugins\Response\Store;
 use SmokeTests\Plugins\Response\StoreCookies;
+use SmokeTests\Plugins\Response\StoreHtmlText;
+use SmokeTests\Plugins\Response\StoreHtmlValue;
 use Throwable;
 
 class Handler
@@ -93,6 +95,8 @@ class Handler
 
         $handler->addPlugin(new Store(Store::extractConfig($testConfig)));
         $handler->addPlugin(new StoreCookies(StoreCookies::extractConfig($testConfig)));
+        $handler->addPlugin(new StoreHtmlText(StoreHtmlText::extractConfig($testConfig)));
+        $handler->addPlugin(new StoreHtmlValue(StoreHtmlValue::extractConfig($testConfig)));
 
         return $handler;
     }

@@ -1156,6 +1156,11 @@ class Header
     /**
      * @var string
      */
+    public const X_CACHE_STATUS = 'X-Cache-Status';
+
+    /**
+     * @var string
+     */
     public const X_CONTENT_DURATION = 'X-Content-Duration';
 
     /**
@@ -1440,6 +1445,7 @@ class Header
         self::X_WAP_PROFILE,
         self::X_WEBKIT_CSP,
         self::X_XSS_PROTECTION,
+        self::X_CACHE_STATUS
     ];
 
     private $name, $value;
