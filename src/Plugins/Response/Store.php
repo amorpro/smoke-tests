@@ -117,9 +117,9 @@ class Store extends Base
         }
 
         foreach ($vars as $var) {
-            if (isset($json[$var])) {
-                self::$store[sprintf(self::VARIABLES_MASK, $var) ] = $json[$var];
-            }
+            Assert::true(isset($json[$var]), sprintf('Store variable not found: %s', $var));
+
+            self::$store[sprintf(self::VARIABLES_MASK, $var) ] = $json[$var];
         }
     }
 

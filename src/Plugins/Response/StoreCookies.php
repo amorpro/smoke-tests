@@ -121,9 +121,10 @@ class StoreCookies extends Base
 
         foreach ($vars as $var) {
             $var = trim($var);
-            if (isset($cookies[$var])) {
-                self::$store[sprintf(self::VARIABLES_MASK, $var) ] = $cookies[$var];
-            }
+
+            Assert::true(isset($cookies[$var]), sprintf('StoreCookie variable not found: %s', $var));
+
+            self::$store[sprintf(self::VARIABLES_MASK, $var) ] = $cookies[$var];
         }
     }
 
