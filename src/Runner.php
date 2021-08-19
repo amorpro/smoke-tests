@@ -82,7 +82,7 @@ class Runner
 
     private function printTestFile($testsFilePath)
     {
-        $testName = str_replace(realpath(SMOKE_TESTS_CALLED_PROJECT_TESTS_DIR) . DIRECTORY_SEPARATOR, '',
+        $testName = str_replace(realpath(SMOKE_TESTS_CALLED_PROJECT_TESTS_TESTS_DIR) . DIRECTORY_SEPARATOR, '',
                                 realpath($testsFilePath));
         $testNameDecoratorLine = str_repeat('-', 60-strlen($testName));
         line(sprintf('%s %s', $testName, $testNameDecoratorLine));
