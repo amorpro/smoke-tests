@@ -85,6 +85,20 @@ return [
                 'jdialog3',
                 'is_authorized',
             ],
+
+            // (Optional) SmokeTests\Plugins\Response\StoreHtmlText
+            // The same as Store utility from above but the variables will be taken
+            // from the text of the html element that were returned in response.
+            'store_html_text' => [
+                'join_label' => '.__join-us'
+            ]
+
+            // (Optional) SmokeTests\Plugins\Response\StoreHtmlValue
+            // The same as Store utility from above but the variables will be taken
+            // from the value of the html element that were returned in response.
+            'store_html_value' => [
+                'csrf' => 'input[name=csrf]'
+            ],
         ],
     ]*/
 
