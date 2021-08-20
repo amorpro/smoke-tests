@@ -6,42 +6,18 @@
  * Time: 1:12
  */
 
-namespace SmokeTests\Plugins\Response;
+namespace SmokeTests\Plugins\Response\Store;
 
-use PHPHtmlParser\Dom;
-use PHPHtmlParser\Dom\Node\AbstractNode;
 use SmokeTests\Http\Request;
 use SmokeTests\Http\Response;
-use SmokeTests\Plugins\Base;
 use Throwable;
-use Webmozart\Assert\Assert;
 
-class StoreHtmlText extends Base
+abstract class Base extends \SmokeTests\Plugins\Base
 {
 
     public const VARIABLES_MASK = '{%s}';
 
     public static $store = [];
-
-    /**
-     * @param array $config
-     * @return bool
-     */
-    public static function needToInitialize(array $config): bool
-    {
-        return isset($config['response']['store_html_text']);
-    }
-
-    /**
-     * @param array $config
-     * @return mixed
-     */
-    public static function extractConfig(array $config)
-    {
-        $configs = $config['response']['store_html_text'];
-        return $configs;
-    }
-
 
     public function beforeHandle(Request $request, Response $response, array $plugins):void
     {
@@ -98,33 +74,6 @@ class StoreHtmlText extends Base
     private function replaceVariables($value): string
     {
         return strtr($value, self::$store);
-    }
-
-    public function afterHandle(Request $request, Response $response, array $plugins):void
-    {
-        if (!$response->isOk()) {
-            return;
-        }
-
-        $vars = $this->getVariablesToExtract();
-        if (!$vars) {
-            return;
-        }
-
-        Assert::isArray($vars, 'store_html_text command should be key => value array where key is a variable name and value is a html selector');
-
-        $dom = new Dom();
-        $dom->loadStr($response->getBody());
-        foreach($vars as $varName => $htmlSelector) {
-            /** @var AbstractNode $htmlElement */
-            $htmlElement = $dom->find($htmlSelector)[0];
-
-            if(!$htmlElement) {
-                Assert::false(false, sprintf('StoreHtmlText selector "%s" for variable "%s" not found', $htmlSelector, $varName));
-            }
-
-            self::$store[sprintf(self::VARIABLES_MASK, $varName) ] = $htmlElement->text;
-        }
     }
 
     /**

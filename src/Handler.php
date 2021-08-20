@@ -18,10 +18,10 @@ use SmokeTests\Plugins\Exception\SkipTest;
 use SmokeTests\Plugins\Response\Contains;
 use SmokeTests\Plugins\Response\Headers;
 use SmokeTests\Plugins\Response\Status;
-use SmokeTests\Plugins\Response\Store;
-use SmokeTests\Plugins\Response\StoreCookies;
-use SmokeTests\Plugins\Response\StoreHtmlText;
-use SmokeTests\Plugins\Response\StoreHtmlValue;
+use SmokeTests\Plugins\Response\Store\Store;
+use SmokeTests\Plugins\Response\Store\StoreCookies;
+use SmokeTests\Plugins\Response\Store\StoreHtmlText;
+use SmokeTests\Plugins\Response\Store\StoreHtmlValue;
 use Throwable;
 
 class Handler
